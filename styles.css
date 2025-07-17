@@ -12,11 +12,61 @@ h2 {
     text-align: center;
 }
 
+input
+{
+    border-color: #bdbdbd;
+    border-radius: 100px;
+    border-width: 2px;
+}
+
+label
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.inline-block-label
+{
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.inline-block-label-alt
+{
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#radio-yes
+{
+    color: green;
+}
+
+#radio-no
+{
+    color: red;
+}
+
+button
+{
+    margin: 10px;
+    background-color: wheat ;
+    width: 100px;
+    height: 30px;
+    border-color: saddlebrown;
+    border-width: 1px;
+    border-radius: 8px;
+}
+
 .generator-box
 {
+    font-family: "Lucida Console", monospace;
+    background-color: #f9f9f9;
     max-width: 400px;
     margin: auto;
-    margin-bottom: 25px;
     padding: 1rem;
     border: 1px solid black;
     border-radius: 8px;
@@ -35,7 +85,7 @@ h2 {
 #headerFieldset>legend
 {
     font-weight: bold;
-    margin: 0 auto;
+    margin: 0 auto 0;
     text-align: center;
     display: block;
 }
@@ -50,7 +100,7 @@ h2 {
     width: 900px;
     border: 1px solid black;
     padding: 1rem;
-    margin: 1rem auto;
+    margin: 32px auto;
     border-radius: 8px;
     background-color: #f9f9f9;
     text-align: justify;
