@@ -1,80 +1,132 @@
-h1
-{
+h1 {
+    font-size: clamp(2rem, 5vw, 3.125rem); /* ~50px */
+    color: purple;
+    -webkit-text-stroke: 1px black;
     text-align: center;
 }
 
-h1+p
-{
+h1 + p {
     text-align: center;
 }
 
 h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem); /* ~40px */
     text-align: center;
+    color: darkorchid;
+    -webkit-text-stroke: 1px black;
 }
 
-input
-{
+#disclaimer {
+    font-size: 1.0625rem; /* 17px */
+    margin-top: -1.5rem;
+}
+
+input {
+    font-size: 1.25rem; /* 20px */
+    width: 90%;
+    max-width: 570px;
+    height: 2rem;
     border-color: #bdbdbd;
     border-radius: 100px;
     border-width: 2px;
+    margin-bottom: 0.625rem;
+    margin-top: 0.3125rem;
+    padding-left: 0.8125rem;
 }
 
-label
-{
-    margin-top: 5px;
-    margin-bottom: 5px;
+#age {
+    width: 52px;
+}
+
+label {
+    margin-top: 0.3125rem;
+    margin-bottom: 0.3125rem;
     display: block;
 }
 
-.inline-block-label
-{
+.inline-block-label,
+.inline-block-label-alt {
     display: inline-block;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
-.inline-block-label-alt
-{
-    display: inline-block;
-    margin-top: 10px;
-    margin-bottom: 10px;
+.inline-block-label {
+    margin-top: 0.3125rem;
+    margin-bottom: 0.3125rem;
 }
 
-#radio-yes
-{
-    color: green;
+.inline-block-label-alt {
+    margin-top: 0.625rem;
+    margin-bottom: 0.625rem;
 }
 
-#radio-no
-{
-    color: red;
-}
-
-button
-{
-    margin: 10px;
-    background-color: wheat ;
+#randomifblank,
+#random-everything {
     width: 100px;
-    height: 30px;
+    margin-left: -2.5rem;
+    margin-right: -2.5rem;
+    height: 1.0625rem;
+}
+
+#yes-married,
+#no-married {
+    width: 50px;
+    height: 1.0625rem;
+}
+
+#radio-yes {
+    color: green;
+    margin-right: -1.25rem;
+}
+
+#radio-no {
+    color: red;
+    margin-left: -0.625rem;
+    margin-right: -1.25rem;
+    text-align: center;
+}
+
+#timeGetHome,
+#timeToSleep {
+    width: 79px;
+    margin-left: 0;
+    font-size: 1.125rem; /* 18px */
+    text-align: center;
+}
+
+.pNormal {
+    font-size: 1.1875rem; /* 19px */
+    margin-top: 0;
+}
+
+button {
+    font-size: 1.25rem; /* 20px */
+    margin: 0.625rem;
+    margin-left: 1.875rem;
+    margin-right: 1.875rem;
+    background-color: wheat;
+    width: 100px;
+    height: 50px;
     border-color: saddlebrown;
     border-width: 1px;
     border-radius: 8px;
 }
 
-.generator-box
-{
+.generator-box {
+    text-align: justify;
+    font-size: 1.25rem; /* 20px */
     font-family: "Lucida Console", monospace;
     background-color: #f9f9f9;
-    max-width: 400px;
+    max-width: 600px;
     margin: auto;
-    padding: 1rem;
+    padding: 1.875rem; /* 30px */
+    padding-top: 2.8125rem; /* 45px */
     border: 1px solid black;
     border-radius: 8px;
 }
 
-#headerFieldset
-{
-    width: 975px;
+#headerFieldset {
+    width: 95%;
+    max-width: 1160px;
     border: 1px solid black;
     padding: 1rem;
     margin: auto;
@@ -82,59 +134,66 @@ button
     background-color: #f9f9f9;
 }
 
-#headerFieldset>legend
-{
-    font-weight: bold;
-    margin: 0 auto 0;
-    text-align: center;
-    display: block;
-}
-
-#headerFieldset>legend+p
-{
-    text-align: center;
-}
-
-.paragraphFieldset
-{
-    width: 900px;
-    border: 1px solid black;
-    padding: 1rem;
-    margin: 32px auto;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    text-align: justify;
-}
-
-.paragraphLegend 
-{
+#headerFieldset > legend {
     font-weight: bold;
     margin: 0 auto;
     text-align: center;
     display: block;
 }
 
-.figure-row 
-{
+#headerFieldset > legend + p {
+    text-align: center;
+}
+
+legend {
+    font-size: clamp(1.5rem, 4vw, 2rem); /* ~30px */
+}
+
+.paraResult {
+    font-size: 1.3125rem; /* 21px */
+}
+
+.paragraphFieldset {
+    width: 95%;
+    max-width: 960px;
+    border: 1px solid black;
+    padding: 1rem;
+    padding-left: 1.5625rem;
+    padding-right: 1.5625rem;
+    margin: 2rem auto;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: justify;
+}
+
+.paragraphLegend {
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+.figure-row {
     display: flex;
     gap: 1rem;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
-.yoshikagekiraimg
-{
-    width: 130px;
+.yoshikagekiraimg {
+    width: 100%;
+    max-width: 400px;
     height: auto;
-    margin-top: 10px;
+    margin-top: 3.125rem; /* 50px */
+    margin-bottom: 1.25rem; /* 20px */
 }
 
-.button-div
-{
+.button-div {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
-footer
-{
+footer {
     text-align: center;
 }
