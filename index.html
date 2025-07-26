@@ -17,7 +17,7 @@
 
         <div></div><h1 id="titleh1">MONOPOLY DELUXE</h1></div>
         <div class="navBar">
-            <div class="navItem playerNameDiv">
+            <div class="navItem changeNameLine">
                 <label id="playerNameLabel" class="headerLabel"></label>
             </div>
             <div class="navItem changeNameLine">
@@ -25,9 +25,11 @@
                 <input 
                 id="changeName" 
                 type="text" 
-                placeholder="change name here!"
+                placeholder="Change name here!"
                 >
                 <button id="changeNameBttn" type="button" disabled>Change</button>
+                <button id="resetButton" type="button" disabled>Reset</button>
+                <small id="outOfSync"></small>
             </div>
         </div>
 
@@ -37,11 +39,22 @@
     <div id="wrapMain">
         <div id="roomSelection">
             <h2 class="sectionTitle">Room Selection</h2>
-            <div class="canvasContainer"> 
-                <canvas id="roomSelectionCanvas"></canvas>
+            <div class="selectRoom"> 
+                <button id="createRoomBtn">Create Room</button>
+                <input type="text" id="roomCodeInput" placeholder="Enter Room Code" />
+                <button id="joinRoomBtn">Join Room</button>
+                <button id="refreshBtn">Refresh</button>
+            </div>
+            <div id="roomList">
+                  <div class="roomHeader">
+                    <div class="column">Room Name</div>
+                    <div class="column">Players</div>
+                    <div class="column">Current Turn</div>
+                </div>
             </div>
         </div>
         <div id="waitingRoom">
+            <h2 class="sectionTitle">Waiting Room</h2>
             <div class="canvasContainer">
                 <canvas id="waitingRoomCanvas"></canvas>    
             </div>

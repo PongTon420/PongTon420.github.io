@@ -1,43 +1,19 @@
-// Supabase:
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
 const supabaseUrl = "https://ydembgafgkmhpnydqqyw.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlkZW1iZ2FmZ2ttaHBueWRxcXl3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzNjQwNTIsImV4cCI6MjA2ODk0MDA1Mn0.QnTKCsDAgM_AhtQGzxfN88qGyyMBKhk5-hmBnqdovoc";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-//-----------------Ket noi database o tren, ke no di wee-----------------//
-
 const nameInput = document.getElementById('changeName');
 const changeNameButton = document.getElementById('changeNameBttn');
+const resetButton = document.getElementById('resetButton')
 const playerNameLabel = document.getElementById('playerNameLabel');
 
 let showScreenId = 'roomSelection';
 let playerId = localStorage.getItem('player_id');
 let playerName = localStorage.getItem('player_name');
 
-//Dat ten bien lai theo ten thanh pho
-const start = 0;
-const land1 = 1;
-const land2 = 2;
-const land3 = 3;
-const land4 = 4;
-const land5 = 5;
-const land6 = 6;
-const land7 = 7;
-const land8 = 8;
-const land9 = 9;
-const land10 = 10;
-const land11 = 11;
-const land12 = 12;
-const land13 = 13;
-const land14 = 14;
-const land15 = 15;
-const land16 = 16;
-//...-> land39
-
-
-//function:
-async function createNewGuest() 
+async function createNewGuest()
 {
     const Pang = ["PangDia", "PangSai", "PangPhui"];
     const randomNumber09 = Math.floor(Math.random() * 10); //0-9
@@ -59,8 +35,8 @@ async function createNewGuest()
     localStorage.setItem('player_name', defaultName);
     playerId = id;
     playerName = defaultName;
-};
 
+};
 async function initPlayer() 
 {
     playerId = localStorage.getItem('player_id');
@@ -72,10 +48,9 @@ async function initPlayer()
     }
     playerNameLabel.innerHTML = `Player's name: <span class="player-namejs">${playerName}</span>`;
 };
-
-async function changeName() {
+async function changeName() 
+{
     console.log("change button pressed");
-
     changeNameButton.disabled = true;
     nameInput.disabled = true;
 
@@ -103,13 +78,6 @@ async function changeName() {
     nameInput.disabled = false;
     console.log("Successfully changed name to:", newName);
 };
-
-function disableChangeButton(a)
-{
-    if (nameInput.value.trim() !== "") changeNameButton.disabled = false;
-    else changeNameButton.disabled = true;
-};   
-
 function showScreen(id) {
     document.getElementById('roomSelection').style.display = 'none';
     document.getElementById('waitingRoom').style.display = 'none';
@@ -117,17 +85,41 @@ function showScreen(id) {
     document.getElementById(id).style.display = 'block';
 };
 
-function SelectRoom()
+async function idExist() 
 {
-    const roomSelectionCanvas = document.getElementById('roomSelectionCanvas');
-    const ctx = roomSelectionCanvas.getContext("2d");
-    roomSelectionCanvas.width = 700;
-    roomSelectionCanvas.height = 500;
+    playerId = localStorage.getItem('player_id');
+    const { data, error } = await supabase
+    .from('Players')
+    .select('*')
+    .eq('player_id', playerId);
+    if (error) {
+    console.error("Supabase error:", error);
+    } else if (data.length > 0) {
+    console.log("Player exists:", data[0]);
+    } else {
+    console.log("Player not found.");
+    const OOSsmall = document.getElementById('outOfSync');
+    OOSsmall.textContent = `You are out of sync! Please press Reset button`;
+    resetButton.disabled = false;
+    }
 }
 
 //run shit here:
 initPlayer();
+idExist();
 showScreen(showScreenId);
-nameInput.addEventListener('input', disableChangeButton);
+
+nameInput.addEventListener('input', () => 
+{   if (nameInput.value.trim() !== "") changeNameButton.disabled = false;
+    else changeNameButton.disabled = true;
+});
+
 changeNameButton.addEventListener('click', changeName);
-window.addEventListener('load', SelectRoom);
+resetButton.addEventListener('click', () => {localStorage.clear(); 
+    location.reload(); console.log("clear");});
+
+//Room Selection section:
+
+//Waiting Room section:
+
+//Game board section:
