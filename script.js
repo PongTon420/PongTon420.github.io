@@ -6,10 +6,9 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 const nameInput = document.getElementById('changeName');
 const changeNameButton = document.getElementById('changeNameBttn');
-const resetButton = document.getElementById('resetButton')
+const syncButton = document.getElementById('syncButton')
 const playerNameLabel = document.getElementById('playerNameLabel');
 
-let showScreenId = 'roomSelection';
 let playerId = localStorage.getItem('player_id');
 let playerName = localStorage.getItem('player_name');
 
@@ -78,11 +77,24 @@ async function changeName()
     nameInput.disabled = false;
     console.log("Successfully changed name to:", newName);
 };
-function showScreen(id) {
-    document.getElementById('roomSelection').style.display = 'none';
-    document.getElementById('waitingRoom').style.display = 'none';
-    document.getElementById('gameBoard').style.display = 'none';
-    document.getElementById(id).style.display = 'block';
+
+function hideButton(className)
+{
+    console.log(className);
+    const buttons = document.getElementsByClassName('hiddenBtn');
+    for (let i = 0; i < buttons.length; i++) 
+    {
+        buttons[i].style.display = 'none';
+    }
+};
+
+function showButton(className)
+{
+    const buttons = document.getElementsByClassName(className);
+    for (let i = 0; i < buttons.length; i++) 
+    {
+        buttons[i].style.display = 'block';
+    }
 };
 
 async function idExist() 
@@ -99,7 +111,7 @@ async function idExist()
     } else {
     console.log("Player not found.");
     const OOSsmall = document.getElementById('outOfSync');
-    OOSsmall.textContent = `You are out of sync! Please press Reset button`;
+    OOSsmall.textContent = `You are out of sync! Please press Sync button`;
     resetButton.disabled = false;
     }
 }
@@ -107,7 +119,6 @@ async function idExist()
 //run shit here:
 initPlayer();
 idExist();
-showScreen(showScreenId);
 
 nameInput.addEventListener('input', () => 
 {   if (nameInput.value.trim() !== "") changeNameButton.disabled = false;
@@ -115,11 +126,117 @@ nameInput.addEventListener('input', () =>
 });
 
 changeNameButton.addEventListener('click', changeName);
-resetButton.addEventListener('click', () => {localStorage.clear(); 
+syncButton.addEventListener('click', () => {localStorage.clear(); 
     location.reload(); console.log("clear");});
 
 //Room Selection section:
+const createButton = document.getElementById('createRoomBtn');
+createButton.addEventListener('click', createRoom);
+checkPlayerInRoom();
 
-//Waiting Room section:
+async function removeRoomList(room)
+{
+    const { error } = await supabase
+    .from('Rooms')
+    .delete()
+    .eq('room_id', room.id);
+    const roomDiv = document.getElementById(`room-${room.id}`);
+    if (roomDiv) roomDiv.remove();
+}
+async function createRoom()
+{
+    console.log("createRoomButton pressed")
+    document.getElementById('createRoomBtn').disabled = true;
+    const roomNameInput = document.getElementById('roomName');
+    const roomIdInput = document.getElementById('roomId');
+    let roomName = roomNameInput.value.trim();
+    let roomId = roomIdInput.value.trim();
+    let hostId = playerId;
+    const { error } = await supabase
+    .from('Rooms')
+    .insert([
+        { room_id: roomId, room_name: roomName, host_id: playerId },
+    ])
+    .select();
+    if (error) console.log("create room error");
+
+    const { error: room_players_error } = await supabase
+    .from('room_players')
+    .insert([
+        { room_id: roomId, player_id: hostId, is_host: true },
+    ])
+    .select();
+    location.reload()
+}
+
+async function updateRoomList() {
+    const roomListDiv = document.getElementById('roomList');
+    roomListDiv.innerHTML = '';
+
+    const { data: rooms, error: roomError } = await supabase
+        .from('Rooms')
+        .select('room_id, room_name, status');
+    if (roomError) {
+        console.error('Failed to fetch rooms:', roomError);
+        return;
+    }
+
+    const { data: roomPlayers, error: rpError } = await supabase
+    .from('room_players')
+    .select('room_id');
+
+    if (rpError) {
+        console.error('Failed to fetch room_players:', rpError);
+        return;
+    }
+
+    const playerCounts = {};
+    roomPlayers.forEach(rp => {
+        playerCounts[rp.room_id] = (playerCounts[rp.room_id] || 0) + 1;
+    });
+
+     rooms.forEach(room => {
+        const row = document.createElement('div');
+        row.className = 'roomRow';
+        row.id = `room-${room.room_id}`;
+
+        const nameCol = document.createElement('div');
+        nameCol.className = 'roomListCol';
+        nameCol.textContent = room.room_name;
+
+        const playerCol = document.createElement('div');
+        playerCol.className = 'roomListCol';
+        playerCol.textContent = playerCounts[room.room_id] || 0;
+
+        const statusCol = document.createElement('div');
+        statusCol.className = 'roomListCol';
+        statusCol.textContent = room.status;
+
+        row.appendChild(nameCol);
+        row.appendChild(playerCol);
+        row.appendChild(statusCol);
+
+        roomListDiv.appendChild(row);
+    });
+}
+
+async function checkPlayerInRoom()
+{
+console.log("check_player");
+const { data, error } = await supabase
+  .from("room_players")
+  .select("*")
+  .eq("player_id", playerId); // replace with your actual variable
+if (data.length > 0)
+    {
+        showButton('hiddenBtn');
+        //document.getElementById('createRoomBtn').disabled = true; //Bật này lên khi ko còn test nx
+        document.getElementById('leaveBtn').disabled = false;
+        document.getElementById('playBtn').disabled = false;
+    }
+else hideButton('hiddenBtn');
+}
+
+window.onload = updateRoomList;
 
 //Game board section:
