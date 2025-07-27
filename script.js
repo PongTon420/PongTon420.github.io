@@ -112,7 +112,7 @@ async function idExist()
     console.log("Player not found.");
     const OOSsmall = document.getElementById('outOfSync');
     OOSsmall.textContent = `You are out of sync! Please press Sync button`;
-    resetButton.disabled = false;
+    syncButton.disabled = false;
     }
 }
 
