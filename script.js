@@ -55,7 +55,7 @@ async function changeName()
     changeNameButton.disabled = true;
     nameInput.disabled = true;
 
-    const clickSound = new Audio("sound/AmongUsIndian.mp3");
+    const clickSound = new Audio("sound/kongchi.mp3");
     clickSound.play();
 
     let newName = nameInput.value.trim();
@@ -144,7 +144,11 @@ async function leaveRoom()
     .eq('player_id', playerId);
     await deleteRoomWhenNoPlayers();
     await waitDelete();
+    const clickSound = new Audio("sound/leave.mp3");
+    clickSound.play();
+    clickSound.addEventListener('ended', () => {
     location.reload();
+    });
 };
 async function deleteRoomWhenNoPlayers()
 {
@@ -201,7 +205,11 @@ async function createRoom()
             { room_id: roomId, player_id: hostId, is_host: true },
         ])
         .select();
+        const clickSound = new Audio("sound/sinsaminling.mp3");
+        clickSound.play();
+        clickSound.addEventListener('ended', () => {
         location.reload();
+        });
     }
 };
 async function updateRoomList() {
