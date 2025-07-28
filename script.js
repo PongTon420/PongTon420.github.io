@@ -138,6 +138,7 @@ leaveButton.addEventListener('click', leaveRoom);
 
 async function leaveRoom()
 {
+    document.getElementById('leaveBtn').disabled = true;
     const { error} = await supabase
     .from('room_players')
     .delete()
@@ -172,6 +173,7 @@ async function waitDelete()
 };
 async function createRoom()
 {
+    document.getElementById('createRoomBtn').disabled = true;
     console.log("createRoomButton pressed")
     const { data, error1 } = await supabase
     .from("room_players")
