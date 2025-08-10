@@ -1,71 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Monopoly Deluxe">
-    <title>Monopoly Deluxe</title>
-    <link rel="icon" type="image/png" href="./image/favicon.png"/>
-    <link rel="stylesheet" href="./style.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm" type="module"></script>
-    <script type="module" src="./script.js"></script>
-</head>
-<body>
-
-    
-    <header id="wrapHeader">
-
-        <div></div><h1 id="titleh1">MONOPOLY DELUXE</h1></div>
-        <div class="navBar">
-            <div class="navItem changeNameLine">
-                <label id="playerNameLabel" class="headerLabel"></label>
-            </div>
-            <div class="navItem changeNameLine">
-                <label for="changeName" class="headerLabel">Change name here:</label>
-                <input 
-                id="changeName" 
-                type="text" 
-                placeholder="Change name here!"
-                >
-                <button id="changeNameBttn" type="button" disabled>Change</button>
-                <button id="syncButton" type="button" disabled>Sync</button>
-                <small id="outOfSync"></small>
-            </div>
-        </div>
-
-    </header>
-    
-    <main>
-    <div id="wrapMain">
-        <div id="roomSelection">
-            <h2 class="sectionTitle">Room Selection</h2>
-            <div class="RoomNav"> 
-                <form>
-                    <label for="roomName" class="roomLabelFont">Room Name:</label>
-                    <input id="roomName" type ="text" class="inputBox roomInput" placeholder="e.g. pangsai">
-                    <label for="roomId" class="roomLabelFont">Room ID:</label>
-                    <input id="roomId" type = "number" class="inputBox roomInput" placeholder="Number Only">
-                    <button type= "button" id ="createRoomBtn">Create Room</button>
-                </form>
-                <input type="text" id="roomJoinIDInput" placeholder="Enter Room ID" class="inputBox"/>
-                <button id="joinRoomBtn">Join Room</button>
-                <button class="hiddenBtn" id="leaveBtn" disabled style="display: none;">Leave</button>
-                <button class="hiddenBtn" id="playBtn" disabled style="display: none;">Play</button>
-            </div>
-            <div id="roomListbox">
-                <div class="roomHeader">
-                    <div class="roomListCol roomName roomHeaderFont">ROOM NAME</div>
-                    <div class="roomListCol playerCount roomHeaderFont">PLAYERS</div>
-                    <div class="roomListCol status roomHeaderFont">STATUS</div>
-                </div>
-                <div id="roomList"></div>
-            </div>
-        </div>
-    </div>
-    </main>
-    <foot>
-    
-    </foot>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
