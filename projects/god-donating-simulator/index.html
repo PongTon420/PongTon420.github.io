@@ -23,13 +23,18 @@
             <img src="./image/coin.png" alt="Coin Image" class="coin-image" />
             <span id="donation-amount"></span>
         </div>
-        <div class="button-container">
-            <input type="text" id="name-input" placeholder="Enter your name (optional)" />
-            <input type="text" id="donation-input" placeholder="Enter donation amount (in VND)" />
-            <button id="donate-button">Donate</button>
-            <button id="pray-button">Pray</button>
-            <button>Do nothing</button>
+        <div class="interaction-container">
+            <div class="input-container">
+                <input type="text" id="name-input" placeholder="Enter your name (optional)" />
+                <input type="text" id="donation-input" placeholder="Enter donation amount (in VND)" />
+            </div>
+            <div class="button-container">
+                <button id="donate-button">Donate</button>
+                <button id="pray-button">Pray</button>
+                <button>Do nothing</button>
+            </div>
         </div>
+
         <div class="message-container">
             <p id="donation-message" style="display: none;"><span id="donator-name"></span> donated <span
                     id="donation-amount-display"></span>

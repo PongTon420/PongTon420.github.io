@@ -20,9 +20,7 @@ donateButton.addEventListener('click', function () {
         donateButton.disabled = false;
         donationInput.focus();
     }, 600);
-    donateSound.currentTime = 0;
-    donateSound.play();
-
+    
     const inputAmount = parseInt(donationInput.value, 10);
     if (isNaN(inputAmount) || inputAmount <= 0) {
 
@@ -53,6 +51,9 @@ donateButton.addEventListener('click', function () {
     const donationAmountDisplayMessage = document.getElementById('donation-amount-display');
     donationAmountDisplayMessage.textContent = inputAmount.toLocaleString('vi-VN') + ' VND';
     fadeOutMessage(donationMessage, 500);
+
+    donateSound.currentTime = 0;
+    donateSound.play();
 })
 
 function fadeOutMessage(element, duration) {

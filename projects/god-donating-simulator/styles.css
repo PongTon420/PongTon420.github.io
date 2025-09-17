@@ -3,6 +3,48 @@
     src: url(./font/Monopoly\ Regular.ttf) format('truetype');
 }
 
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        padding: 15px;
+    }
+
+    .button-container button {
+        font-size: 1rem;
+        padding: 8px 16px;
+        margin: 0 5px;
+        display: block;
+    }
+
+    .button-container {
+        flex-direction: column;
+    }
+
+    .input-container {
+        flex-direction: column;
+    }
+
+    .input-container input {
+        margin: 0 0 10px 0;
+        width: 80%;
+        max-width: none;
+    }
+
+    .coin-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    #donation-amount {
+        font-size: 1.2rem;
+    }
+}
+
 h1 {
     display: block;
     text-align: center;
@@ -28,10 +70,10 @@ body {
     margin-top: 1rem;
 }
 
-.button-container {
+.interaction-container {
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 .button-container button {
@@ -49,7 +91,13 @@ body {
     background-color: #7ab8d1;
 }
 
-.button-container input {
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-container input {
     padding: 10px;
     font-size: 1.2rem;
     border-radius: 10px;
@@ -60,7 +108,7 @@ body {
     width: 100%;
 }
 
-.button-container input:focus {
+.input-container input:focus {
     outline: none;
     border-color: #48a2c5;
 }
